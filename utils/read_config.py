@@ -36,7 +36,8 @@ def get_config_mappings(config_file_path):
 
 
 def get_config_email_info(config_file_path:str): 
-    
+    """
+    """
 
 # Dma list
     dmadf = pd.read_excel(config_file_path,sheet_name='DMA List')

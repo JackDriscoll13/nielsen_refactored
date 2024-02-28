@@ -1,1 +1,1 @@
-## The main function
+## The main function for generating the report
