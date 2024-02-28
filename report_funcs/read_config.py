@@ -3,7 +3,7 @@
 import pandas as pd
 
 
-def get_config_mappings(config_file_path): 
+def get_config_mappings(config_file_path:str): 
     """
     Read in important data mappings from our config file. 
     Return those mappings as dictionaries. 
@@ -35,11 +35,12 @@ def get_config_mappings(config_file_path):
 
 
 
-def get_config_email_info(config_file_path:str): 
+def get_config_report_info(config_file_path:str): 
     """
+    Read important info about details of each report from the config file.
     """
 
-# Dma list
+    # Dma list
     dmadf = pd.read_excel(config_file_path,sheet_name='DMA List')
     dmalists = []
     for col in dmadf.columns:
