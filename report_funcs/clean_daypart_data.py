@@ -7,7 +7,7 @@ from .data_cleaning_utils import  map_order, map_geography, rename_full_day
 def clean_daypart_data(path, stationReferenceDict, geography_mapping_dict, order_mapping_dict):
     # Read in file
     try:
-        daypartsdf = pd.read_excel(path+'\\Spectrum News Dayparts.xlsx',sheet_name='Live+Same Day, TV Households',header = 8,skipfooter=8).ffill()
+        daypartsdf = pd.read_excel(path,sheet_name='Live+Same Day, TV Households',header = 8,skipfooter=8).ffill()
     except Exception as e:
         print(e)
         print('There was an issue locating the spectrum dayparts file, this file is critical for the report to generate. ')
@@ -19,7 +19,7 @@ def clean_daypart_data(path, stationReferenceDict, geography_mapping_dict, order
     daypartsdf['RTG % (X.X)'] = daypartsdf['RTG % (X.X)'].replace(' ', 0)
 
     # Strip white space
-    daypartsdf = daypartsdf.applymap(lambda x: x.strip() if isinstance(x, str) else x)
+    daypartsdf = daypartsdf.map(lambda x: x.strip() if isinstance(x, str) else x)
 
     # TEMPORRARY UNTIL SOURCE IS FIXED - Remove s1df and s1mk from all markets, re add them back where they're regions are
     dallasdf = daypartsdf[(daypartsdf['Viewing Source'] == 'S1DF ') & (
@@ -48,7 +48,7 @@ def clean_daypart_data(path, stationReferenceDict, geography_mapping_dict, order
     # Pivot table for each dma, each station
     for i in daypartsdf['DMA'].unique():
         dmaonly = daypartsdf[daypartsdf['DMA']== i]
-        dmaonly = dmaonly.pivot_table(index='Time',columns='Station',values='RTG', aggfunc = np.sum)
+        dmaonly = dmaonly.pivot_table(index='Time',columns='Station',values='RTG', aggfunc = 'sum')
         dmaonly['DMA'] = i
         reportdf = pd.concat([reportdf,dmaonly],join = 'outer')
     reportdf = reportdf.reset_index().rename(columns={'index':'Daypart'})

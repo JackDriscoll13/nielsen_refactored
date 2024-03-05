@@ -5,7 +5,7 @@
 import pandas as pd
 from .data_cleaning_utils import map_geography
 
-def clean_15min_data(file, stationReferenceDict:dict, chartorderdict:dict) -> pd.DataFrame:
+def clean_15min_data(file, stationReferenceDict:dict, chartorderdict:dict, geography_mapping:dict) -> pd.DataFrame:
     """
     Cleans and maps the 15minfile. Used in both the benchmark and daily files.
     Returns a dataframe.
@@ -27,7 +27,7 @@ def clean_15min_data(file, stationReferenceDict:dict, chartorderdict:dict) -> pd
 
     # Strip White space
     print('Stripping white space for columns')
-    min15df = min15df.applymap(lambda x: x.strip() if isinstance(x, str) else x)
+    min15df = min15df.map(lambda x: x.strip() if isinstance(x, str) else x)
 
     # TEMPORRARY UNTIL SOURCE IS FIXED - Remove s1df and s1mk from all markets, re add them back where they're regions are
     dallasdf = min15df[(min15df['Viewing Source']== 'S1DF') & (min15df['Geography / Metrics']=='Dallas-Ft. Worth')]
@@ -43,7 +43,7 @@ def clean_15min_data(file, stationReferenceDict:dict, chartorderdict:dict) -> pd
     min15df['Station'] = min15df['Viewing Source'].apply(lambda x: stationReferenceDict[x])
 
     # Add DMA specific column 
-    min15df['DMA'] = min15df['Geography / Metrics'].apply(lambda x: map_geography(x))
+    min15df['DMA'] = min15df['Geography / Metrics'].apply(lambda x: map_geography(x, geography_mapping))
     min15df['Order'] = min15df['Time'].apply(lambda x: chartorderdict[x])
 
     # Drop unneccesary columns, rename RTG column

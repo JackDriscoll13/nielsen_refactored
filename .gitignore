@@ -1,3 +1,9 @@
+# Custom Ignore folders
+chart_images/
+data/
+html_outputs/ 
+nielsenConfigv3.xlsx
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
