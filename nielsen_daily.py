@@ -1,6 +1,4 @@
-
 import report_funcs
-import shutil
 
 def create_nielsen_reports(daily_data_15min_path:str, daily_data_dayparts_path:str): 
     
@@ -28,31 +26,23 @@ def create_nielsen_reports(daily_data_15min_path:str, daily_data_dayparts_path:s
     ##############################################################################################
 
 
-    # # Configure DMA objects based on specific data generates chart images and table images saved in temp folder
+    # Configure DMA objects based on specific data generates chart images and table images saved in temp folder
     print('Configuring DMA image objects:\n')
     uniquedmas = {x for i in dmalists for x in i}
 
     dma_html_dict, chart_path_dict, table_path_dict = report_funcs.create_dma_html2(uniquedmas, benchmark_15min, benchmark_dayparts, daily_data_15min, daily_data_dayparts, sn_names_dict)
     print('\nSuccesfully created images.')
-    # # # Write email 
+    # Write email 
     print('Writing emails:')
-    email_dmas = list(uniquedmas)
-    report_funcs.get_email_html(email_dmas, dma_html_dict, chart_path_dict, table_path_dict)
+    email_to = 'jack.driscoll@charter.com'
+    emails = report_funcs.get_email_html(dmalists, email_to, daily_data_15min,
+                                emailrecipaints, emailsubjects, emailnotes,
+                                 dma_html_dict, chart_path_dict, table_path_dict)
+    
 
-    # For effiencys sake we only want to generate each dma object once. 
-    # We save the html for each dma in a dictionary with a dma name as the key and the html as the value
-    # alldmas = {}
-    # for dma in uniquedmas:
-    #     print(f'{dma};', end= ' ')
-    #     alldmas[dma] = report_funcs.create_dma_html(dma, penetrationdict = penetrationMappingDict, snNamesDict= snNamesDict,  avgdayparts=benchmark_dayparts, dailydayparts= daily_data_dayparts, avg15min = benchmark_15min, daily15min = daily_data_15min)
-    #     print('Done,', end= ' ')
-    # print('\nSuccess! Configured all DMA Img Objects')
-
-    # # Now we generate distinct html files based on the dma lists in our config
-    # for i in range(len(dmalists)):
-    #     report_funcs.create_html_body_email(i, dmalists, alldmas, emailrecipaints, emailsubjects, emailnotes, emailattachments)
-
-    #shutil.rmtree('chart_images/')
+    msg = emails[1]
+    report_funcs.send_email(msg, email_to)
+    
 
 
 if __name__ == '__main__':

@@ -14,4 +14,6 @@ from .create_html_body import create_html_body_email
 from .create_dma2 import create_dma_html2
 
 # Write email
-from .write_email import get_email_html
+#from .write_email import get_email_html
+from .create_email2 import get_email_html
+from .connect_send_email import send_email
