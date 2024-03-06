@@ -22,7 +22,7 @@ def get_email_html(dmalists, email_forward, daily_data_15min,
         recipiants = email_recipiants[i] # can embed these if you want them in the email
         note = email_notes[i]
 
-        print(f'\tCreating email #{i+1} with {len(email_dmas)} dma objects ->', end = '')
+        print(f'\tCreating email #{i+1} with {len(email_dmas)} dma objects ->', end = ' ')
         
         msg = EmailMessage()
         msg['Subject'] = str(subject) + ' - ' + str(dow) +' ' + str(dateofdata)

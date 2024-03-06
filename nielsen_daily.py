@@ -40,11 +40,12 @@ def create_nielsen_reports(daily_data_15min_path:str, daily_data_dayparts_path:s
                                  dma_html_dict, chart_path_dict, table_path_dict)
 
     # Send emails
+    print('Sending emails:')
     report_funcs.send_email(emails, email_to)
 
     # Delete image directory (if directed)
     report_funcs.delete_img_dir(del_image_dir)
-    print('All done!')
+    print('All done! Succesfully generated report.')
     
 
 

@@ -16,7 +16,8 @@ def create_img_dir():
 
 def delete_img_dir(del_image_dir:bool): 
     if del_image_dir: 
-        print('Deleting image dir.')
+        print('Deleting image dir ->', end= ' ')
         shutil.rmtree('resources/image_dir/image_dump/')
     else: 
         print('Did not delete image dir. See "resources/image_dir/image_dump/" for raw images.')
+    print('Done.')
