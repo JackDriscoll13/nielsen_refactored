@@ -4,7 +4,7 @@ from .create_chart import create_chart, create_chart_dallas
 
 from email.utils import make_msgid
 
-def create_dma_html2(unique_dmas, benchmark_15min, benchmark_dayparts, daily_data_15min, daily_data_dayparts, sn_names_dict): 
+def create_dma_html2(unique_dmas, benchmark_15min, benchmark_dayparts, daily_data_15min, daily_data_dayparts, sn_names_dict, penetration_dict): 
     dmas_html_dict = {}
     table_path_dict = {}
     chart_path_dict = {}
@@ -48,7 +48,8 @@ def create_dma_html2(unique_dmas, benchmark_15min, benchmark_dayparts, daily_dat
         dmahtml += """
                         <br> <b>Dayparts Table ({dma}):</b> <br>
                         <img src="cid:{table_cid}" width="900">
-                """.format(table_cid = table_cid[1:-1], dma = dma)
+                        <br>{penetration_sentence}<br><br><hr color="black" size="2" width="100%">
+                """.format(table_cid = table_cid[1:-1], dma = dma, penetration_sentence = penetration_dict[dma])
         
         # Save relevant information
         dmas_html_dict[dma] = dmahtml

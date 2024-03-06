@@ -10,7 +10,7 @@ def create_nielsen_reports(daily_data_15min_path:str, daily_data_dayparts_path:s
     # Iniliaze config, read in mappings and info from config
     config_path = 'NielsenConfigv4.xlsx'
     print('Running Nielsen Report...\nReading config file ->', end =' ')
-    daypartsorderDict, chartOrderDict, geomappingDict, stationMappingDict, penetrationMappingDict, sn_names_dict = report_funcs.get_config_mappings(config_path)
+    daypartsorderDict, chartOrderDict, geomappingDict, stationMappingDict, penetration_dict, sn_names_dict = report_funcs.get_config_mappings(config_path)
     dmalists, emailrecipaints, emailsubjects, emailnotes, emailattachments = report_funcs.get_config_report_info(config_path)
     print('Done.')
 
@@ -30,7 +30,7 @@ def create_nielsen_reports(daily_data_15min_path:str, daily_data_dayparts_path:s
     print('Configuring DMA image objects:\n')
     uniquedmas = {x for i in dmalists for x in i}
 
-    dma_html_dict, chart_path_dict, table_path_dict = report_funcs.create_dma_html2(uniquedmas, benchmark_15min, benchmark_dayparts, daily_data_15min, daily_data_dayparts, sn_names_dict)
+    dma_html_dict, chart_path_dict, table_path_dict = report_funcs.create_dma_html2(uniquedmas, benchmark_15min, benchmark_dayparts, daily_data_15min, daily_data_dayparts, sn_names_dict, penetration_dict)
     print('\nSuccesfully created images.')
     # Write email 
     print('Writing emails:')
@@ -40,7 +40,7 @@ def create_nielsen_reports(daily_data_15min_path:str, daily_data_dayparts_path:s
                                  dma_html_dict, chart_path_dict, table_path_dict)
     
 
-    msg = emails[1]
+    msg = emails[0]
     report_funcs.send_email(msg, email_to)
     
 

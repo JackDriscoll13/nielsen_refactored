@@ -28,9 +28,9 @@ def get_email_html(dmalists, email_forward, daily_data_15min,
         body_html = ''
         for dma in email_dmas: 
             body_html += dma_html_dict[dma]
-        recipiants_sting = ','.join(recipiants)
-        recipiants_string = f'<p>Email to:</p><p>{recipiants_sting}</p>'
-        final_email_html = recipiants_string + note + '<hr color="black" size="2" width="100%">' + body_html
+        # recipiants_sting = ','.join(recipiants)
+        # recipiants_string = f'<p>Email to:</p><p>{recipiants_sting}</p>'
+        final_email_html =  note + '<hr color="black" size="2" width="100%">' + body_html
 
         msg.add_alternative(final_email_html, subtype='html')
         
