@@ -5,7 +5,10 @@ from datetime import datetime
 
 def get_email_html(dmalists, email_forward, daily_data_15min,
                    email_recipiants, email_subjects, email_notes,
-                   dma_html_dict, chart_path_dict, table_path_dict): 
+                   dma_html_dict, chart_path_dict, table_path_dict):
+    """
+    """ 
+    
 
     emails = []
 
@@ -36,7 +39,7 @@ def get_email_html(dmalists, email_forward, daily_data_15min,
 
         msg.add_alternative(final_email_html, subtype='html')
         
-        # Add tables
+        # Add tables to email content
         for path in table_path_dict: 
             with open(path, 'rb') as  img:
                     maintype, subtype = mimetypes.guess_type(img.name)[0].split('/')
@@ -45,7 +48,7 @@ def get_email_html(dmalists, email_forward, daily_data_15min,
                                              maintype=maintype, 
                                              subtype=subtype, 
                                              cid=table_path_dict[path])
-        # # Add charts
+        # Add charts to email content
         for path in chart_path_dict: 
             with open(path, 'rb') as  img:
                     maintype, subtype = mimetypes.guess_type(img.name)[0].split('/')

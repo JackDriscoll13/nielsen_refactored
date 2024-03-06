@@ -11,9 +11,12 @@ from .clean_daypart_data import clean_daypart_data
 # Report
 #rom .create_dma import create_dma_html
 from .create_html_body import create_html_body_email
-from .create_dma2 import create_dma_html2
+from .create_dma import create_dma_html
 
 # Write email
-#from .write_email import get_email_html
-from .create_email2 import get_email_html
+from .create_email import get_email_html
 from .connect_send_email import send_email
+
+# Random path utils
+from .path_util import create_img_dir
+from .path_util import delete_img_dir

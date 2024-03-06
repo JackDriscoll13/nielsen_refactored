@@ -12,6 +12,6 @@ def send_email(emails, email_to):
         msg_subject = msg['subject']
         print(f'\tSending email: {msg_subject} ->', end = ' ')
         s.send_message(msg, 'sn_audience_insights@outlook.com', email_to)
-        time.sleep(10)
+        time.sleep(12)
         print('Done. Sent mail.')
     s.quit()
