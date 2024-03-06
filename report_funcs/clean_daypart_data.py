@@ -1,4 +1,4 @@
-
+import warnings
 import pandas as pd
 import numpy as np
 
@@ -7,11 +7,13 @@ from .data_cleaning_utils import  map_order, map_geography, rename_full_day
 def clean_daypart_data(path, stationReferenceDict, geography_mapping_dict, order_mapping_dict):
     # Read in file
     try:
-        daypartsdf = pd.read_excel(path,sheet_name='Live+Same Day, TV Households',header = 8,skipfooter=8).ffill()
+        with warnings.catch_warnings(): # Supress openpyxl default style warning
+            warnings.simplefilter("ignore")
+            daypartsdf = pd.read_excel(path,sheet_name='Live+Same Day, TV Households',header = 8,skipfooter=8).ffill()
     except Exception as e:
         print(e)
         print('There was an issue locating the spectrum dayparts file, this file is critical for the report to generate. ')
-
+        
     # Check for NA values: 
     if ' ' in daypartsdf['RTG % (X.X)'].unique() or daypartsdf['RTG % (X.X)'].isnull().values.any():
         print(f'WARNING!! WARNING!!! Missing RTG found in Dayparts File! \nPath:\n{path}') 
@@ -50,7 +52,9 @@ def clean_daypart_data(path, stationReferenceDict, geography_mapping_dict, order
         dmaonly = daypartsdf[daypartsdf['DMA']== i]
         dmaonly = dmaonly.pivot_table(index='Time',columns='Station',values='RTG', aggfunc = 'sum')
         dmaonly['DMA'] = i
-        reportdf = pd.concat([reportdf,dmaonly],join = 'outer')
+        with warnings.catch_warnings(): # Supress a warning!
+            warnings.simplefilter(action='ignore', category=FutureWarning) # Supress a warning
+            reportdf = pd.concat([reportdf,dmaonly],join = 'outer')
     reportdf = reportdf.reset_index().rename(columns={'index':'Daypart'})
 
     # map order

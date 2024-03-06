@@ -1,7 +1,7 @@
 # For cleaning the 15min and dayparts data
 # This function used to include functionality for concatenating the buffalo file as well, but that has since been removed
 
-
+import warnings
 import pandas as pd
 from .data_cleaning_utils import map_geography
 
@@ -13,7 +13,9 @@ def clean_15min_data(file, stationReferenceDict:dict, chartorderdict:dict, geogr
 
     # Attempt to read in file. 
     try:
-        min15df = pd.read_excel(file,sheet_name='Live+Same Day, TV Households',header = 8,skipfooter=8).ffill()
+        with warnings.catch_warnings(): # Supress openpyxl default style warning
+            warnings.simplefilter("ignore")
+            min15df = pd.read_excel(file,sheet_name='Live+Same Day, TV Households',header = 8,skipfooter=8).ffill()
     except Exception as e:
         print(e)
         print('There was an issue loading the spectrum 15minute file, this file is critical for the report to generate.')
@@ -26,7 +28,6 @@ def clean_15min_data(file, stationReferenceDict:dict, chartorderdict:dict, geogr
     min15df['RTG % (X.X)'] = min15df['RTG % (X.X)'].replace(' ', 0)
 
     # Strip White space
-    print('Stripping white space for columns')
     min15df = min15df.map(lambda x: x.strip() if isinstance(x, str) else x)
 
     # TEMPORRARY UNTIL SOURCE IS FIXED - Remove s1df and s1mk from all markets, re add them back where they're regions are
