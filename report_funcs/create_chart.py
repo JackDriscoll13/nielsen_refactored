@@ -9,11 +9,12 @@ import calendar
 # Version 6
 # Function for configuring chart:
 def create_chart(source, dailydata, avgdata, snNamesDict):
-
+    
     # Isloate data to specific source
     dailydataspec = dailydata[dailydata['Viewing Source']==source]
     avgdataspec = avgdata[avgdata['Viewing Source']==source]
     print(dailydataspec)
+    print(avgdataspec.columns)
 
     # Apply the order
     dailydataspec = dailydataspec.sort_values('Order')
@@ -28,6 +29,7 @@ def create_chart(source, dailydata, avgdata, snNamesDict):
     dailydataspec['Timeinterval'] = dailydataspec['Time'].apply(lambda x: x[-7:])
 
     # grab the month name and the year
+    print(avgdataspec['Dates'].unique())
     month_num = int(str(avgdataspec['Dates'].unique()[0])[0:2])
     month_name = calendar.month_name[month_num]
 
@@ -101,6 +103,8 @@ def create_chart(source, dailydata, avgdata, snNamesDict):
 ## Because dallas have had some changing requests, it's easier to stick it in its own function 
 def create_chart_dallas(dailydata, avgdata, snNamesDict):
 
+    print(avgdata.columns)
+
     # Get neccesary data frames
     dailydataspec = dailydata[dailydata['Viewing Source']=='S1DF']
     dailydataspec_kazd = dailydata[dailydata['Viewing Source']=='KAZD 55.1']
@@ -128,6 +132,7 @@ def create_chart_dallas(dailydata, avgdata, snNamesDict):
     avgdataspec['Timeinterval'] = avgdataspec['Time'].apply(lambda x: x[-7:])
     
     # grab the month name and the year
+    print(avgdataspec['Dates'].unique())
     month_num = int(str(avgdataspec['Dates'].unique()[0])[0:2])
     month_name = calendar.month_name[month_num]
 
