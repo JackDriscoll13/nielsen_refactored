@@ -29,14 +29,13 @@ def create_nielsen_reports(daily_data_15min_path:str, daily_data_dayparts_path:s
     print('Configuring DMA Img Objects:')
     uniquedmas = {x for i in dmalists for x in i}
     print(uniquedmas)
+    print(daily_data_15min['DMA'].unique())
 
-    dma_html_dict, table_path_dict, chart_path_dict = report_funcs.create_dma_html2(uniquedmas, benchmark_dayparts, daily_data_dayparts)
-    # print(dma_html_dict)
-    # print('\n')
+    dma_html_dict, chart_path_dict = report_funcs.create_dma_html2(uniquedmas, benchmark_15min, daily_data_15min, sn_names_dict)
 
     # # Write email 
     email_dmas = list(uniquedmas)
-    report_funcs.get_email_html(email_dmas, dma_html_dict, table_path_dict)
+    report_funcs.get_email_html(email_dmas, dma_html_dict, chart_path_dict)
 
     # For effiencys sake we only want to generate each dma object once. 
     # We save the html for each dma in a dictionary with a dma name as the key and the html as the value

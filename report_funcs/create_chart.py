@@ -8,13 +8,12 @@ import calendar
 
 # Version 6
 # Function for configuring chart:
-def create_chart(source, dailydata, avgdata, snNamesDict):
+def create_chart(dailydata, avgdata, snNamesDict):
     
-    # Isloate data to specific source
-    dailydataspec = dailydata[dailydata['Viewing Source']==source]
-    avgdataspec = avgdata[avgdata['Viewing Source']==source]
-    print(dailydataspec)
-    print(avgdataspec.columns)
+    source = avgdata['Viewing Source'].unique()[0]
+    # Isloate data to specific source (uneeded now)
+    dailydataspec = dailydata
+    avgdataspec = avgdata
 
     # Apply the order
     dailydataspec = dailydataspec.sort_values('Order')
@@ -51,7 +50,7 @@ def create_chart(source, dailydata, avgdata, snNamesDict):
         y= 'Movingavg',
         # Remove markers
         color = '#0A2F6E',
-        ci= None
+        errorbar= None
     )
 
     plt2 = sb.lineplot(
@@ -60,7 +59,7 @@ def create_chart(source, dailydata, avgdata, snNamesDict):
         y= 'Movingavg',
         color ='#689DF3',
         alpha=0.5,
-        ci= None
+        errorbar= None
     )
     l1= plt2.lines[0]
     l2 = plt2.lines[1]
@@ -155,7 +154,7 @@ def create_chart_dallas(dailydata, avgdata, snNamesDict):
         y= 'Movingavg_combined',
         # Remove markers
         color = '#0A2F6E',
-        ci= None, 
+        errorbar= None, 
     )
     # Plot 1
     # plt1 = sb.lineplot(data = dailydataspec,
@@ -163,7 +162,7 @@ def create_chart_dallas(dailydata, avgdata, snNamesDict):
     #     y= 'Movingavg_s1df',
     #     # Remove markers
     #     color = '#0A2F6E',
-    #     ci= None
+    #     errorbar= None
     # )
 
     plt2 = sb.lineplot(
@@ -172,7 +171,7 @@ def create_chart_dallas(dailydata, avgdata, snNamesDict):
         y= 'Movingavg',
         color ='#689DF3',
         alpha=0.5,
-        ci= None
+        errorbar= None
     )
 
     # plt3 = sb.lineplot(data = dailydataspec,
@@ -180,7 +179,7 @@ def create_chart_dallas(dailydata, avgdata, snNamesDict):
     #     y= 'Movingavg_kazd',
     #     # Remove markers
     #     color = '#0A2F6E',
-    #     ci= None, 
+    #     errorbar= None, 
     #     linestyle = 'dotted'
     # )
 
