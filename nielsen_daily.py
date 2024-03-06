@@ -11,31 +11,33 @@ def create_nielsen_reports(daily_data_15min_path:str, daily_data_dayparts_path:s
 
     # Iniliaze config, read in mappings and info from config
     config_path = 'NielsenConfigv4.xlsx'
-
+    print('Running Nielsen Report...\nReading config file ->', end =' ')
     daypartsorderDict, chartOrderDict, geomappingDict, stationMappingDict, penetrationMappingDict, sn_names_dict = report_funcs.get_config_mappings(config_path)
     dmalists, emailrecipaints, emailsubjects, emailnotes, emailattachments = report_funcs.get_config_report_info(config_path)
+    print('Done.')
 
     # Clean data
+
+    print('Reading in and cleaning data ->',end = ' ')
     benchmark_15min = report_funcs.clean_15min_data(benchmark_15min_path, stationMappingDict, chartOrderDict, geomappingDict)
     benchmark_dayparts = report_funcs.clean_daypart_data(benchmark_dayparts_path, stationMappingDict,geomappingDict,daypartsorderDict)
 
     daily_data_15min = report_funcs.clean_15min_data(daily_data_15min_path, stationMappingDict, chartOrderDict, geomappingDict)
     daily_data_dayparts = report_funcs.clean_daypart_data(daily_data_dayparts_path, stationMappingDict,geomappingDict,daypartsorderDict)
-    print('Cleaned Data!')
+    print('Done.')
     ##############################################################################################
 
 
     # # Configure DMA objects based on specific data generates chart images and table images saved in temp folder
-    # print('Configuring DMA Img Objects:')
-    # uniquedmas = {x for i in dmalists for x in i}
-    # print(uniquedmas)
-    # print(daily_data_15min['DMA'].unique())
+    print('Configuring DMA image objects:\n')
+    uniquedmas = {x for i in dmalists for x in i}
 
-    # dma_html_dict, chart_path_dict = report_funcs.create_dma_html2(uniquedmas, benchmark_15min, daily_data_15min, sn_names_dict)
-
+    dma_html_dict, chart_path_dict, table_path_dict = report_funcs.create_dma_html2(uniquedmas, benchmark_15min, benchmark_dayparts, daily_data_15min, daily_data_dayparts, sn_names_dict)
+    print('\nSuccesfully created images.')
     # # # Write email 
-    # email_dmas = list(uniquedmas)
-    # report_funcs.get_email_html(email_dmas, dma_html_dict, chart_path_dict)
+    print('Writing emails:')
+    email_dmas = list(uniquedmas)
+    report_funcs.get_email_html(email_dmas, dma_html_dict, chart_path_dict, table_path_dict)
 
     # For effiencys sake we only want to generate each dma object once. 
     # We save the html for each dma in a dictionary with a dma name as the key and the html as the value

@@ -28,7 +28,6 @@ def create_chart(dailydata, avgdata, snNamesDict):
     dailydataspec['Timeinterval'] = dailydataspec['Time'].apply(lambda x: x[-7:])
 
     # grab the month name and the year
-    print(avgdataspec['Dates'].unique())
     month_num = int(str(avgdataspec['Dates'].unique()[0])[0:2])
     month_name = calendar.month_name[month_num]
 
@@ -102,8 +101,6 @@ def create_chart(dailydata, avgdata, snNamesDict):
 ## Because dallas have had some changing requests, it's easier to stick it in its own function 
 def create_chart_dallas(dailydata, avgdata, snNamesDict):
 
-    print(avgdata.columns)
-
     # Get neccesary data frames
     dailydataspec = dailydata[dailydata['Viewing Source']=='S1DF']
     dailydataspec_kazd = dailydata[dailydata['Viewing Source']=='KAZD 55.1']
@@ -131,7 +128,6 @@ def create_chart_dallas(dailydata, avgdata, snNamesDict):
     avgdataspec['Timeinterval'] = avgdataspec['Time'].apply(lambda x: x[-7:])
     
     # grab the month name and the year
-    print(avgdataspec['Dates'].unique())
     month_num = int(str(avgdataspec['Dates'].unique()[0])[0:2])
     month_name = calendar.month_name[month_num]
 
@@ -146,8 +142,6 @@ def create_chart_dallas(dailydata, avgdata, snNamesDict):
     sb.set(rc={'figure.figsize':(14,4)})
     sb.set_style('white')
     plt.rcParams['xtick.major.pad']='0'
-
-    print(dailydataspec)
     
     plt1 = sb.lineplot(data = dailydataspec,
         x= 'Timeinterval',

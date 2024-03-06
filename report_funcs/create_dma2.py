@@ -4,7 +4,7 @@ from .create_chart import create_chart, create_chart_dallas
 
 from email.utils import make_msgid
 
-def create_dma_html2(unique_dmas, benchmark_15min, daily_data_15min, sn_names_dict): 
+def create_dma_html2(unique_dmas, benchmark_15min, benchmark_dayparts, daily_data_15min, daily_data_dayparts, sn_names_dict): 
     dmas_html_dict = {}
     table_path_dict = {}
     chart_path_dict = {}
@@ -13,11 +13,13 @@ def create_dma_html2(unique_dmas, benchmark_15min, daily_data_15min, sn_names_di
 
     for dma in unique_dmas: 
         
-        print(f'\nDMA: "{dma}"\n')
+        print(f'\tDMA: "{dma}" ->', end =' ')
 
         # Isloate the data 
         avg15min = benchmark_15min[benchmark_15min['DMA']==dma]
         daily15min = daily_data_15min[daily_data_15min['DMA']==dma]
+        avgdayparts = benchmark_dayparts[benchmark_dayparts['DMA']==dma]
+        dailydayparts = daily_data_dayparts[daily_data_dayparts['DMA']==dma]
         
 
         # Initialize the dma html 
@@ -36,25 +38,25 @@ def create_dma_html2(unique_dmas, benchmark_15min, daily_data_15min, sn_names_di
 
 
         # Create the table
-        # if dma == 'Dallas/Ft. Worth':
-        #     table = create_table(dma,avgdayparts,dailydayparts,KAZD=True)
-        # else: 
-        #     table = create_table(dma,avgdayparts,dailydayparts)
-        # tablepath = image_folder + dma[0:3] + '_table.png'
-        # dfi.export(table, tablepath, dpi = 500,  chrome_path='C:\Program Files\Google\Chrome\Application\chrome.exe')
-        # table_cid = make_msgid()
-        # dmahtml += """
-        #                 <br> <b>Dayparts Table ({dma}):</b> <br>
-        #                 <img src="cid:{table_cid}" width="900">
-        #         """.format(table_cid = table_cid[1:-1], dma = dma)
+        if dma == 'Dallas/Ft. Worth':
+            table = create_table(dma,avgdayparts,dailydayparts,KAZD=True)
+        else: 
+            table = create_table(dma,avgdayparts,dailydayparts)
+        tablepath = image_folder + dma[0:3] + '_table.png'
+        dfi.export(table, tablepath, dpi = 500,  chrome_path='C:\Program Files\Google\Chrome\Application\chrome.exe')
+        table_cid = make_msgid()
+        dmahtml += """
+                        <br> <b>Dayparts Table ({dma}):</b> <br>
+                        <img src="cid:{table_cid}" width="900">
+                """.format(table_cid = table_cid[1:-1], dma = dma)
         
         # Save relevant information
         dmas_html_dict[dma] = dmahtml
-        #table_path_dict[tablepath] = table_cid
+        table_path_dict[tablepath] = table_cid
         chart_path_dict[chartpath] = chart_cid
 
-        
-    return dmas_html_dict, chart_path_dict
+        print('Done.')
+    return dmas_html_dict, chart_path_dict, table_path_dict
 
 
 # if __name__ == '__main__':

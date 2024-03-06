@@ -66,7 +66,7 @@ def create_table(DMA, avgdf, dailydf, KAZD = False):
     #dailystyle = dailystyle.set_table_attributes('style="border-collapse: collapse; border: 0; width: 70%;"')
     # Apply Mask, hide set dark line above 2nd child
     dailystyle = dailystyle.apply(
-        lambda x: mask.applymap(color_mask), axis=None)
+        lambda x: mask.map(color_mask), axis=None)
     dailystyle = dailystyle.set_table_styles(
 
        [{"selector": "td, th", "props": [("border-left", "none"), ("border-right","none"), ("border-top","none"), ("border-bottom","none")]},
