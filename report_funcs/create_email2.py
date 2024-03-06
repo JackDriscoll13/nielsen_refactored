@@ -16,9 +16,11 @@ def get_email_html(dmalists, email_forward, daily_data_15min,
     for i in range(len(dmalists)):
         email_dmas = dmalists[i]
         subject = email_subjects[i]
-        recipiants = email_recipiants[i]
+        recipiants = email_recipiants[i] # can embed these if you want them in the email
         note = email_notes[i]
 
+        print(f'\tCreating email #{i+1} with {len(email_dmas)} dma objects ->', end = '')
+        
         msg = EmailMessage()
         msg['Subject'] = str(subject) + ' - ' + str(dow) +' ' + str(dateofdata)
         msg['From'] = 'sn_audience_insights@outlook.com'
@@ -54,5 +56,6 @@ def get_email_html(dmalists, email_forward, daily_data_15min,
                                             cid=chart_path_dict[path])
         
         emails.append(msg)
+        print('Done.')
 
     return emails
