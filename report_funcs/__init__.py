@@ -13,6 +13,9 @@ from .clean_daypart_data import clean_daypart_data
 from .create_html_body import create_html_body_email
 from .create_dma import create_dma_html
 
+# Create html files
+from .export_html_files import save_html_files
+
 # Write email
 from .create_email import get_email_html
 from .connect_send_email import send_email, send_email_gmail

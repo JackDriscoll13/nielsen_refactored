@@ -35,22 +35,28 @@ def create_nielsen_reports(daily_data_15min_path:str, daily_data_dayparts_path:s
 
     # Write email 
     print('Creating emails:')
-    emails = report_funcs.get_email_html(dmalists, email_to, daily_data_15min,
+    emails, html_strings = report_funcs.get_email_html(dmalists, email_to, daily_data_15min,
                                 emailrecipaints, emailsubjects, emailnotes,
                                  dma_html_dict, chart_path_dict, table_path_dict)
 
+    # Save html files
+    print('Saving html files:')
+    report_funcs.save_html_files(html_strings, emails, chart_path_dict, table_path_dict)
+
     # Send emails
-    print('Sending emails:')
-    # report_funcs.send_email(emails, email_to)
+    # print('Sending emails:')
+    # # report_funcs.send_email(emails, email_to)
     report_funcs.send_email_gmail(emails, email_to)
 
-
     # Delete image directory (if directed)
-    report_funcs.delete_img_dir(del_image_dir)
+    report_funcs.delete_img_dir(del_image_dir= False)
     print('All done! Succesfully generated report.')
     
 
 
+
+#################################    
+# For testing purposes locally: 
 if __name__ == '__main__':
     create_nielsen_reports(daily_data_15min_path = 'resources/data/Test Daily Data/Spectrum News - 15 Mins_03-04-2024.xlsx' , daily_data_dayparts_path = 'resources/data/Test Daily Data/Spectrum News Dayparts_03-04-2024.xlsx', 
                            email_to='jack.driscoll@charter.com')

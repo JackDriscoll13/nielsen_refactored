@@ -11,6 +11,7 @@ def get_email_html(dmalists, email_forward, daily_data_15min,
     
 
     emails = []
+    html_raw = []
 
     # Calculate 
     dateofdata = str(daily_data_15min['Dates'].unique()[0])
@@ -58,8 +59,8 @@ def get_email_html(dmalists, email_forward, daily_data_15min,
                                             maintype=maintype, 
                                             subtype=subtype, 
                                             cid=chart_path_dict[path])
-        
+        html_raw.append(final_email_html)
         emails.append(msg)
         print('Done.')
 
-    return emails
+    return emails, html_raw

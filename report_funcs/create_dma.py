@@ -30,7 +30,7 @@ def create_dma_html(unique_dmas, image_folder, benchmark_15min, benchmark_daypar
         else: 
             chart = create_chart(daily15min, avg15min, sn_names_dict)
         chartpath = image_folder + dma[0:3] + '_chart.png'
-        chart_cid = make_msgid()
+        chart_cid = make_msgid(domain = 'NWNYMKNAL334CZ2.CORP.CHARTERCOM.com')
         chart.savefig(chartpath,bbox_inches="tight")
         dmahtml += '<br><img src="cid:{chart_cid}" width="900">'.format(chart_cid=chart_cid[1:-1])  
 
@@ -42,7 +42,7 @@ def create_dma_html(unique_dmas, image_folder, benchmark_15min, benchmark_daypar
         tablepath = image_folder + dma[0:3] + '_table.png'
         #dfi.export(table, tablepath, dpi = 500,  chrome_path='C:\Program Files\Google\Chrome\Application\chrome.exe') This is the chrome path on my local computer 
         dfi.export(table, tablepath, dpi = 500)
-        table_cid = make_msgid()
+        table_cid = make_msgid(domain = 'NWNYMKNAL334CZ2.CORP.CHARTERCOM.com')
         dmahtml += """
                         <br> <b>Dayparts Table ({dma}):</b> <br>
                         <img src="cid:{table_cid}" width="900">
