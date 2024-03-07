@@ -40,7 +40,8 @@ def create_dma_html(unique_dmas, image_folder, benchmark_15min, benchmark_daypar
         else: 
             table = create_table(dma,avgdayparts,dailydayparts)
         tablepath = image_folder + dma[0:3] + '_table.png'
-        dfi.export(table, tablepath, dpi = 500,  chrome_path='C:\Program Files\Google\Chrome\Application\chrome.exe')
+        #dfi.export(table, tablepath, dpi = 500,  chrome_path='C:\Program Files\Google\Chrome\Application\chrome.exe') This is the chrome path on my local computer 
+        dfi.export(table, tablepath, dpi = 500,  chrome_path='/usr/bin/google-chrome')
         table_cid = make_msgid()
         dmahtml += """
                         <br> <b>Dayparts Table ({dma}):</b> <br>
