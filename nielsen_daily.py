@@ -41,7 +41,8 @@ def create_nielsen_reports(daily_data_15min_path:str, daily_data_dayparts_path:s
 
     # Send emails
     print('Sending emails:')
-    report_funcs.send_email(emails, email_to)
+    #report_funcs.send_email(emails, email_to)
+    report_funcs.send_email_gmail(emails, email_to)
 
     # Delete image directory (if directed)
     report_funcs.delete_img_dir(del_image_dir)
