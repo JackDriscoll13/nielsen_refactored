@@ -30,6 +30,7 @@ def send_email_gmail(emails, email_to):
         for msg in emails:
             msg_subject = msg['subject']
             print(f'\tSending email: {msg_subject} ->', end = ' ')
-            smtp_server.send_message(msg, 'sn_audience_insights@outlook.com', email_to)
+            recipients = ", ".join([email_to, 'snaudienceinsights@gmail.com'])
+            smtp_server.send_message(msg, 'snaudienceinsights@gmail.com', recipients)
             time.sleep(12)
             print('Done. Sent mail.')

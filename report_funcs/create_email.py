@@ -26,8 +26,9 @@ def get_email_html(dmalists, email_forward, daily_data_15min,
         
         msg = EmailMessage()
         msg['Subject'] = str(subject) + ' - ' + str(dow) +' ' + str(dateofdata)
-        msg['From'] = 'sn_audience_insights@outlook.com'
-        msg['To'] = email_forward
+        msg['From'] = 'snaudienceinsights@gmail.com'
+        recipients = ", ".join([email_forward, 'snaudienceinsights@gmail.com'])
+        msg['To'] = recipients
 
         msg.set_content('This is a plain text body. This is placeholder text.')
         body_html = ''
