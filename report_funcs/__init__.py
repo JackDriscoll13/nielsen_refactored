@@ -15,7 +15,7 @@ from .create_dma import create_dma_html
 
 # Write email
 from .create_email import get_email_html
-from .connect_send_email import send_email
+from .connect_send_email import send_email, send_email_gmail
 
 # Random path utils
 from .path_util import create_img_dir
