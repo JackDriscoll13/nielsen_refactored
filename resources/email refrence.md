@@ -15,6 +15,6 @@ From browser (username and password):
 snaudienceinsights@gmail.com  
 audeinceinsights1 
 
-The app uses a 
+The app uses a special [google app password](https://knowledge.workspace.google.com/kb/how-to-create-app-passwords-000009237) to connect to the gmail server. It is 'tmnq tmji drsf tnvc'
 
 
