@@ -25,6 +25,8 @@ def create_nielsen_reports(daily_data_15min_path:str, daily_data_dayparts_path:s
     print('Done.')
     ##############################################################################################
     # Initialize directory to dump images
+    
+    report_funcs.delete_img_dir()
     img_dump_dir = report_funcs.create_img_dir()
 
     # Configure DMA objects based on specific data generates chart images and table images saved in image dir
@@ -48,8 +50,6 @@ def create_nielsen_reports(daily_data_15min_path:str, daily_data_dayparts_path:s
     # # report_funcs.send_email(emails, email_to)
     report_funcs.send_email_gmail(emails, email_to)
 
-    # Delete image directory (if directed)
-    report_funcs.delete_img_dir(del_image_dir= False)
     print('All done! Succesfully generated report.')
     
 

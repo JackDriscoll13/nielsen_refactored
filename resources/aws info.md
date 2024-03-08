@@ -1,4 +1,8 @@
 
+# Run streamlit perm:
+nohup python3 -m streamlit run app.py
+
+
 
 # Sample local cids: 
 

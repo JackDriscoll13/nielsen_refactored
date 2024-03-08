@@ -1,5 +1,5 @@
 # nielsen_refactored
- a report that generates and sends html emails based on daily nielsen data
+ link to app: [http://3.147.67.55:8501](http://3.147.67.55:8501)
 
 # Overview
 

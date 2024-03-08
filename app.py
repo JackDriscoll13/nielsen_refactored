@@ -20,4 +20,4 @@ st.write(' If you are ready, you can generate the report with the button. It wil
 if st.button('Generate Report', type='primary', use_container_width=True):
     with st.spinner('Running Report...'):
         create_nielsen_reports(daily_15min_file, daily_dayparts_file, email_to)
-    st.write('Report Generated! Check your inbox (could come in the next minute or so).')
+    st.write('Report Generated! Check your inbox (should come in the next minute or so).')
