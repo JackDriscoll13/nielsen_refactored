@@ -5,6 +5,10 @@ import time
 import streamlit_funcs
 from nielsen_daily import create_nielsen_reports
 
+st.set_page_config(
+        page_title="Nielsen Reports App",
+)
+
 st.subheader('Upload Nielsen Data Here:', help= "These files should be able to be dragged straight from your inbox.")
 col1, col2 = st.columns(2)
 with col1:
