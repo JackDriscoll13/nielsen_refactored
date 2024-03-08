@@ -26,7 +26,7 @@ st.write(' If you are ready, you can generate the report with the button. It wil
 
 if st.button('Generate Report', type='primary', use_container_width=True):
     with st.spinner('Running Report...'):
-        create_nielsen_reports(daily_15min_file, daily_dayparts_file, email_to, create_html = False)
+        create_nielsen_reports(daily_15min_file, daily_dayparts_file, email_to, generate_html= False)
         time.sleep(1)
         # if create_html: 
         #     st.write('HTML outputs:')
