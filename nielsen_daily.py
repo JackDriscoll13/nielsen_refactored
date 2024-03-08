@@ -1,6 +1,7 @@
 import report_funcs
 
-def create_nielsen_reports(daily_data_15min_path:str, daily_data_dayparts_path:str, email_to:str, del_image_dir:bool = True): 
+def create_nielsen_reports(daily_data_15min_path:str, daily_data_dayparts_path:str, 
+                           email_to:str, generate_html:bool, del_image_dir:bool = True): 
     
     ######################
     # Initialize benchmark data 
@@ -25,8 +26,7 @@ def create_nielsen_reports(daily_data_15min_path:str, daily_data_dayparts_path:s
     print('Done.')
     ##############################################################################################
     # Initialize directory to dump images
-    
-    report_funcs.delete_img_dir()
+    report_funcs.delete_img_dir(del_image_dir=del_image_dir)
     img_dump_dir = report_funcs.create_img_dir()
 
     # Configure DMA objects based on specific data generates chart images and table images saved in image dir
@@ -42,17 +42,17 @@ def create_nielsen_reports(daily_data_15min_path:str, daily_data_dayparts_path:s
                                  dma_html_dict, chart_path_dict, table_path_dict)
 
     # Save html files
-    print('Saving html files:')
-    report_funcs.save_html_files(html_strings, emails, chart_path_dict, table_path_dict)
+    print('Saving html files ->', end = ' ')
+    report_funcs.save_html_files(generate_html, html_strings, emails, 
+                                 chart_path_dict, table_path_dict)
 
     # Send emails
-    # print('Sending emails:')
+    print('Sending emails:')
     # # report_funcs.send_email(emails, email_to)
     report_funcs.send_email_gmail(emails, email_to)
 
     print('All done! Succesfully generated report.')
     
-
 
 
 #################################    
