@@ -5,8 +5,8 @@ def create_nielsen_reports(daily_data_15min_path:str, daily_data_dayparts_path:s
     
     ######################
     # Initialize benchmark data 
-    benchmark_15min_path = 'resources/data/Febuary Benchmark/Spectrum News - 15 Mins.xlsx'
-    benchmark_dayparts_path = 'resources/data/Febuary Benchmark/Spectrum News Dayparts.xlsx'
+    benchmark_15min_path = 'resources/data/April Benchmark/Spectrum News - 15 Mins.xlsx'
+    benchmark_dayparts_path = 'resources/data/April Benchmark/Spectrum News Dayparts.xlsx'
 
     # Iniliaze config, read in mappings and info from config
     config_path = 'resources/NielsenConfigv4.xlsx'
